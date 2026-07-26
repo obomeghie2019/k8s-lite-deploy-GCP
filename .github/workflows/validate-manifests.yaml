@@ -1,0 +1,22 @@
+name: Validate K8s Manifests
+
+on:
+  pull_request:
+    paths: ["k8s/**"]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install kubeconform
+        run: |
+          curl -sL https://github.com/yannh/kubeconform/releases/latest/download/kubeconform-linux-amd64.tar.gz | tar xz
+          sudo mv kubeconform /usr/local/bin
+
+      - name: Build manifests with kustomize
+        run: kubectl kustomize k8s/ > rendered.yaml
+
+      - name: Validate
+        run: kubeconform -strict -summary rendered.yaml

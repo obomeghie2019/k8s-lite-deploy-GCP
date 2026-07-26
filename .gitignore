@@ -1,0 +1,14 @@
+# Terraform
+infra/.terraform/
+infra/*.tfstate
+infra/*.tfstate.*
+infra/.terraform.lock.hcl
+infra/crash.log
+
+# Secrets
+*.env
+kubeconfig*
+
+# OS/editor
+.DS_Store
+.vscode/

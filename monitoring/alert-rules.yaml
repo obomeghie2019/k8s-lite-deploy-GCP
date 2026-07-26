@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: 3mtt-capstone-by-obomeghie2019-alerts
+  namespace: monitoring
+  labels:
+    release: monitoring
+spec:
+  groups:
+    - name: 3mtt-capstone-by-obomeghie2019.rules
+      rules:
+        - alert: DemoAppHighCPU
+          expr: sum(rate(container_cpu_usage_seconds_total{pod=~"3mtt-capstone-by-obomeghie2019.*"}[5m])) > 0.5
+          for: 2m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Demo app CPU usage is high"
+            description: "3mtt-capstone-by-obomeghie2019 pods have exceeded 0.5 CPU cores averaged over 5m for 2+ minutes."

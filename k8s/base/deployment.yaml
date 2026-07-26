@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 3mtt-capstone-by-obomeghie2019
+  labels:
+    app: 3mtt-capstone-by-obomeghie2019
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: 3mtt-capstone-by-obomeghie2019
+  template:
+    metadata:
+      labels:
+        app: 3mtt-capstone-by-obomeghie2019
+    spec:
+      containers:
+        - name: 3mtt-capstone-by-obomeghie2019
+          image: ghcr.io/obomeghie2019/3mtt-capstone-by-obomeghie2019:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "250m"
+              memory: "256Mi"
+          envFrom:
+            - configMapRef:
+                name: 3mtt-capstone-by-obomeghie2019-config

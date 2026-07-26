@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kubernetes-Lite Deploy · MVP</title>
+    <!-- Bootstrap 5 + Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <style>
+        body {
+            background: #f8fafc;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+        .card-shadow {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.03), 0 2px 6px rgba(0,20,50,0.05);
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+        .profile-img {
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(145deg, #1a2a3a, #0f1a26);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.8rem;
+            border: 3px solid #3b82f6;
+            box-shadow: 0 4px 10px rgba(59,130,246,0.2);
+        }
+        .badge-stack {
+            background: #eef2ff;
+            color: #1e3a8a;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+            padding: 0.4rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            border: 1px solid #c7d2fe;
+        }
+        .tech-tag {
+            background: white;
+            border: 1px solid #e2e8f0;
+            color: #1e293b;
+            padding: 0.25rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            display: inline-block;
+            margin: 0.15rem 0.2rem;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+        }
+        .tech-tag i {
+            margin-right: 4px;
+            color: #3b82f6;
+        }
+        .cluster-badge {
+            background: #0b1e33;
+            color: #b9d5ff;
+            border-radius: 40px;
+            padding: 0.3rem 1.2rem;
+            font-weight: 500;
+            font-size: 0.8rem;
+            border: 1px solid #2d4b6e;
+        }
+        .footer-bar {
+            border-top: 1px solid #e9edf2;
+            background: white;
+        }
+        .btn-outline-k8s {
+            border-color: #326ce5;
+            color: #326ce5;
+        }
+        .btn-outline-k8s:hover {
+            background: #326ce5;
+            color: white;
+        }
+        .scale-badge {
+            background: #dbeafe;
+            color: #1e4a7a;
+            font-weight: 600;
+        }
+        .section-title {
+            font-weight: 600;
+            color: #0b1e33;
+            letter-spacing: -0.02em;
+        }
+        .manifest-card {
+            background: #0b1420;
+            color: #d4e2f7;
+            border-radius: 14px;
+            padding: 0.8rem 1.2rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            white-space: pre-wrap;
+            border: 1px solid #2a3d57;
+        }
+        .demo-video-placeholder {
+            background: #eef3f9;
+            border-radius: 16px;
+            padding: 2rem 1rem;
+            border: 1px dashed #b9c8dd;
+            color: #1f3a5f;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- MAIN CONTAINER -->
+    <div class="container py-4">
+
+        <!-- HEADER: Capstone + Name + 3MTT -->
+        <div class="row align-items-center g-3 mb-4">
+            <div class="col-md-8">
+                <div class="d-flex flex-wrap align-items-center gap-3">
+                    <span class="cluster-badge"><i class="bi bi-cloud-upload me-1"></i> k8s-lite · MVP</span>
+                    <h1 class="display-6 fw-bold mb-0" style="color: #0b1e33;">Kubernetes-Lite Deploy</h1>
+                </div>
+                <p class="text-secondary mt-2 mb-0" style="max-width: 600px;">
+                    <i class="bi bi-diagram-3 me-2"></i> Scaling microservices is hard — this MVP shows manifests, deploy, scale &amp; demo.
+                </p>
+            </div>
+            <div class="col-md-4 d-flex justify-content-md-end">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="profile-img">LA</div>
+                    <div>
+                        <div class="fw-bold" style="color: #0b1e33;">Obomeghie Lukman Adam</div>
+                        <div class="small text-secondary"><i class="bi bi-trophy me-1"></i> 3MTT Airtel Next-Gen Cohort</div>
+                        <div class="small text-secondary"><i class="bi bi-people me-1"></i> FG · 3MTT Technical Talents</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STACK BANNER -->
+        <div class="bg-white rounded-4 p-3 mb-4 card-shadow d-flex flex-wrap align-items-center gap-2">
+            <span class="fw-semibold me-2" style="color: #1f3a5f;"><i class="bi bi-stack me-1"></i> Tech Stack</span>
+            <span class="tech-tag"><i class="bi bi-code-slash"></i> Python</span>
+            <span class="tech-tag"><i class="bi bi-braces"></i> Playwright</span>
+            <span class="tech-tag"><i class="bi bi-box-seam"></i> Postman</span>
+            <span class="tech-tag"><i class="bi bi-bug"></i> Selenium</span>
+            <span class="tech-tag"><i class="bi bi-filetype-html"></i> HTML/CSS</span>
+            <span class="tech-tag"><i class="bi bi-bootstrap"></i> Bootstrap</span>
+            <span class="tech-tag"><i class="bi bi-react"></i> React</span>
+            <span class="tech-tag"><i class="bi bi-php"></i> PHP</span>
+            <span class="tech-tag"><i class="bi bi-node"></i> NodeJS</span>
+            <span class="tech-tag"><i class="bi bi-database"></i> MySQL</span>
+            <span class="tech-tag"><i class="bi bi-database"></i> PostgreSQL</span>
+            <span class="tech-tag"><i class="bi bi-box"></i> Docker</span>
+            <span class="tech-tag"><i class="bi bi-git"></i> Git/GitHub Actions</span>
+            <span class="tech-tag"><i class="bi bi-cloud"></i> Terraform</span>
+            <span class="tech-tag"><i class="bi bi-kubernetes"></i> K8s</span>
+            <span class="tech-tag"><i class="bi bi-graph-up"></i> Prometheus/Grafana</span>
+            <span class="tech-tag"><i class="bi bi-check-circle"></i> SonarQube</span>
+            <span class="tech-tag"><i class="bi bi-check-all"></i> QA</span>
+        </div>
+
+        <!-- MVP FEATURES GRID -->
+        <div class="row g-4 mb-4">
+            <div class="col-md-3 col-6">
+                <div class="bg-white p-3 rounded-4 card-shadow text-center h-100">
+                    <div class="fs-2 text-primary"><i class="bi bi-file-earmark-code"></i></div>
+                    <div class="fw-semibold">Manifests</div>
+                    <div class="small text-secondary">Deployment + Service</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="bg-white p-3 rounded-4 card-shadow text-center h-100">
+                    <div class="fs-2 text-success"><i class="bi bi-rocket-takeoff"></i></div>
+                    <div class="fw-semibold">Deploy</div>
+                    <div class="small text-secondary">kubectl apply -f</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="bg-white p-3 rounded-4 card-shadow text-center h-100">
+                    <div class="fs-2 text-warning"><i class="bi bi-arrows-expand"></i></div>
+                    <div class="fw-semibold">Scale</div>
+                    <div class="small text-secondary">kubectl scale --replicas=3</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="bg-white p-3 rounded-4 card-shadow text-center h-100">
+                    <div class="fs-2 text-danger"><i class="bi bi-play-circle"></i></div>
+                    <div class="fw-semibold">Demo</div>
+                    <div class="small text-secondary">2-3 min video</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LIVE DEMO: MICROSERVICE DISPLAY -->
+        <div class="row g-4">
+            <!-- Left: service status + manifest -->
+            <div class="col-lg-7">
+                <div class="bg-white rounded-4 p-4 card-shadow">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="section-title mb-0"><i class="bi bi-hdd-stack me-2"></i>Live microservice · k8s-lite</h5>
+                        <span class="badge bg-success bg-opacity-10 text-success"><i class="bi bi-circle-fill me-1" style="font-size: 0.5rem;"></i> Running (3 replicas)</span>
+                    </div>
+                    <!-- simulated service info -->
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="bg-light p-3 rounded-3">
+                                <div class="small text-secondary">SERVICE</div>
+                                <div class="fw-bold">web-frontend</div>
+                                <div class="small"><span class="badge bg-primary bg-opacity-10 text-primary">ClusterIP</span> 10.96.0.1:80</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-light p-3 rounded-3">
+                                <div class="small text-secondary">DEPLOYMENT</div>
+                                <div class="fw-bold">web-deploy</div>
+                                <div><span class="badge scale-badge"><i class="bi bi-arrow-up-circle"></i> replicas: 3</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- manifest preview -->
+                    <div class="mt-3">
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <i class="bi bi-filetype-yaml text-primary"></i>
+                            <span class="fw-semibold" style="color: #1f3a5f;">deployment.yaml</span>
+                            <span class="badge bg-secondary bg-opacity-10 text-secondary">manifests/</span>
+                        </div>
+                        <div class="manifest-card">
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-deploy
+  labels:
+    app: web
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+      - name: web-app
+        image: lukman/k8s-lite:v1.0
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-frontend
+spec:
+  selector:
+    app: web
+  ports:
+  - port: 80
+    targetPort: 8080
+  type: ClusterIP
+                        </div>
+                    </div>
+                    <div class="mt-3 d-flex gap-2">
+                        <button class="btn btn-outline-k8s btn-sm"><i class="bi bi-plus-circle"></i> Scale up</button>
+                        <button class="btn btn-outline-secondary btn-sm"><i class="bi bi-arrow-repeat"></i> Rollout restart</button>
+                        <button class="btn btn-outline-secondary btn-sm"><i class="bi bi-eye"></i> Logs</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Demo + Deliverables -->
+            <div class="col-lg-5">
+                <div class="bg-white rounded-4 p-4 card-shadow h-100 d-flex flex-column">
+                    <h5 class="section-title mb-3"><i class="bi bi-play-btn me-2"></i>Demo · 2-3 min</h5>
+                    <div class="demo-video-placeholder flex-grow-1 d-flex flex-column align-items-center justify-content-center text-center">
+                        <i class="bi bi-film" style="font-size: 2.5rem; color: #3b82f6;"></i>
+                        <div class="fw-semibold mt-2">🎬 k8s-lite demo</div>
+                        <div class="small text-secondary">showcasing deploy, scale, manifests, Prometheus/Grafana</div>
+                        <button class="btn btn-primary btn-sm mt-3"><i class="bi bi-play-fill"></i> Play demo (simulated)</button>
+                        <div class="mt-2 small text-secondary">📁 repo with pipeline/IaC, diagram, README</div>
+                    </div>
+                    <!-- deliverables chips -->
+                    <div class="mt-3 d-flex flex-wrap gap-1">
+                        <span class="badge bg-dark bg-opacity-10 text-dark"><i class="bi bi-git"></i> Repo</span>
+                        <span class="badge bg-dark bg-opacity-10 text-dark"><i class="bi bi-diagram-3"></i> Arch diagram</span>
+                        <span class="badge bg-dark bg-opacity-10 text-dark"><i class="bi bi-file-text"></i> README</span>
+                        <span class="badge bg-dark bg-opacity-10 text-dark"><i class="bi bi-camera-video"></i> Demo video</span>
+                        <span class="badge bg-dark bg-opacity-10 text-dark"><i class="bi bi-robot"></i> GitHub Actions</span>
+                        <span class="badge bg-dark bg-opacity-10 text-dark"><i class="bi bi-cloud-upload"></i> cloud free tier</span>
+                        <span class="badge bg-dark bg-opacity-10 text-dark"><i class="bi bi-graph-up"></i> Prometheus/Grafana</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PIPELINE / IAC + ADDITIONAL -->
+        <div class="row g-4 mt-2">
+            <div class="col-md-6">
+                <div class="bg-white rounded-4 p-4 card-shadow">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                        <i class="bi bi-diagram-2 fs-5 text-primary"></i>
+                        <h6 class="section-title mb-0">IaC &amp; Pipeline</h6>
+                        <span class="badge bg-secondary bg-opacity-10 text-secondary ms-auto">Terraform · GitHub Actions</span>
+                    </div>
+                    <div class="small">
+                        <div><i class="bi bi-check-circle-fill text-success me-1"></i> Terraform: AWS EKS (free tier) / kind cluster</div>
+                        <div><i class="bi bi-check-circle-fill text-success me-1"></i> GitHub Actions: build, push Docker, kubectl apply</div>
+                        <div><i class="bi bi-check-circle-fill text-success me-1"></i> SonarQube static analysis</div>
+                        <div><i class="bi bi-check-circle-fill text-success me-1"></i> Prometheus metrics + Grafana dashboard</div>
+                    </div>
+                    <div class="mt-2">
+                        <span class="tech-tag"><i class="bi bi-github"></i> actions</span>
+                        <span class="tech-tag"><i class="bi bi-hash"></i> terraform</span>
+                        <span class="tech-tag"><i class="bi bi-box"></i> docker build</span>
+                        <span class="tech-tag"><i class="bi bi-kubernetes"></i> kubectl</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="bg-white rounded-4 p-4 card-shadow">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                        <i class="bi bi-person-lines-fill fs-5 text-primary"></i>
+                        <h6 class="section-title mb-0">3MTT · Airtel Next-Gen</h6>
+                        <span class="badge bg-warning bg-opacity-10 text-warning ms-auto">FG Initiative</span>
+                    </div>
+                    <div class="small">
+                        <div><i class="bi bi-award-fill text-warning me-1"></i> Obomeghie Lukman Adam · participant</div>
+                        <div><i class="bi bi-people-fill me-1"></i> Three Million Technical Talents (3MTT)</div>
+                        <div><i class="bi bi-satellite me-1"></i> Airtel Next-Gen Cohort</div>
+                        <div class="mt-1"><span class="badge-stack"><i class="bi bi-check2-circle"></i> Quality Assurance · Python · Playwright · Postman · Selenium</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER: quick links -->
+        <div class="footer-bar mt-4 pt-3 pb-2 d-flex flex-wrap justify-content-between align-items-center">
+            <div class="small text-secondary">
+                <i class="bi bi-boxes me-1"></i> Kubernetes-Lite · MVP · v1.0
+            </div>
+            <div>
+                <span class="badge bg-light text-dark me-1"><i class="bi bi-file-earmark-code"></i> manifests/</span>
+                <span class="badge bg-light text-dark me-1"><i class="bi bi-hdd-network"></i> k8s-lite</span>
+                <span class="badge bg-light text-dark"><i class="bi bi-cloud"></i> free tier</span>
+            </div>
+            <div class="small">
+                <i class="bi bi-github me-1"></i> repo · <i class="bi bi-box-arrow-up-right ms-1"></i> architecture diagram
+            </div>
+        </div>
+    </div>
+
+    <!-- bootstrap js optional -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

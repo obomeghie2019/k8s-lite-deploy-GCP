@@ -1,0 +1,18 @@
+grafana:
+  admin:
+    existingSecret: "grafana-admin-secret"
+    userKey: "admin-user"
+    passwordKey: "admin-password"
+  service:
+    type: ClusterIP
+
+prometheus:
+  prometheusSpec:
+    retention: 1d
+    resources:
+      requests:
+        cpu: 100m
+        memory: 256Mi
+
+alertmanager:
+  enabled: true
