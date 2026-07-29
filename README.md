@@ -28,5 +28,17 @@ cd k8s-lite-deploy
 ./scripts/cluster-down.sh
 \`\`\`
 
-## Demo video
-[link here]
+## 📺 Video Demonstrations
+
+### YouTube
+[![Watch on YouTube](https://img.shields.io/badge/YouTube-Watch%20Demo-red?style=for-the-badge&logo=youtube)](https://www.youtube.com/watch?v=BhGmuqFY8gs)
+
+### Thumbnail
+<a href="https://www.youtube.com/watch?v=BhGmuqFY8gs">
+  <img src="https://img.youtube.com/vi/BhGmuqFY8gs/hqdefault.jpg" alt="Demo" width="480" height="360">
+</a>
+
+### Download
+<a href="https://www.youtube.com/watch?v=BhGmuqFY8gs" download>
+  <button>Download Video</button>
+</a>
