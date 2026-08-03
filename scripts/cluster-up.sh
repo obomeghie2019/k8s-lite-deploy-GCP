@@ -1,13 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-<<<<<<< HEAD
-echo "==> Logging into GCP (if not already)"
-az account show > /dev/null 2>&1 || az login
-=======
 echo "==> Checking gcloud auth (if not already)"
 gcloud auth list --filter=status:ACTIVE --format="value(account)" | grep -q . || gcloud auth login
->>>>>>> 96ed2cb8851c07fff87a255a4b114f4318ea280a
 
 echo "==> Initializing Terraform"
 cd infra
